@@ -1,4 +1,10 @@
 # Load required packages
+# install.packages("tidyverse")
+# if you got error : cannot open file 'Gun_violence.csv': No such file or directory
+# set the path to your dataset directory: 
+# Use getwd() to get the current path. 
+# setwd("C:/path/to/your/dataset")
+
 library(tidyverse)
 
 # Read the dataset
