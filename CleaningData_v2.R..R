@@ -5,6 +5,17 @@
 # Use getwd() to get the current path. 
 # setwd("C:/path/to/your/dataset")
 
+# if you got error: Error in library(tidyverse) : there is no package called ‘tidyverse’ 
+# insall the package by runing : install.packages("tidyverse")
+
+######################################################################
+# This code only to Extract the first 100 rows and save it           #
+#so i can push a small sample of the dataset to github               #
+#data_sample <- data[1:100, ]                                        #
+# Save the 100-row sample as a new CSV file                          #
+# write.csv(data_sample, "data_sample_100.csv", row.names = FALSE)   #
+######################################################################
+
 library(tidyverse)
 
 # Read the dataset
@@ -46,3 +57,5 @@ data_clean <- na.omit(data)
 
 # View the final cleaned data
 View(data_clean)
+
+
