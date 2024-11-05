@@ -1,0 +1,2 @@
+To get the full dataset donwload the dataset from the original source here:
+https://github.com/jamesqo/gun-violence-data
