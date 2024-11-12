@@ -47,7 +47,7 @@ data$state_house_district[is.na(data$state_house_district)] <- median(data$state
 # After Imputation: Checking again for any remaining missing values
 colSums(is.na(data))  # Should now show 0 missing values for the imputed columns
 
-
+ 
 
 # Final View of the Cleaned Data
 View(data)  # View the updated dataset with imputed values
@@ -58,4 +58,32 @@ data_clean <- na.omit(data)
 # View the final cleaned data
 View(data_clean)
 
+# Add a casualties column: 1 if there are any casualties, 0 otherwise
+data_clean <- data_clean %>%
+  mutate(casualties = ifelse(n_killed > 0 | n_injured > 0, 1, 0))
 
+
+# Split the data into training and testing sets
+set.seed(123)  # For reproducibility
+train_indices <- sample(1:nrow(data_clean), 0.7 * nrow(data_clean))
+train_data <- data_clean[train_indices, ]
+test_data <- data_clean[-train_indices, ]
+
+
+
+# install.packages("randomForest")
+if (!require(randomForest)) install.packages("randomForest")
+
+# Load the randomForest library
+library(randomForest)
+
+# Ensure the target variable is a factor for classification
+data_clean$casualties <- as.factor(data_clean$casualties)
+
+# Fit a Random Forest classification model
+rf_model <- randomForest(casualties ~ n_killed + n_injured + latitude + longitude +
+                           state_senate_district + state_house_district + n_guns_involved,
+                         data = data_clean, ntree = 100)
+
+# View the model results
+print(rf_model)
