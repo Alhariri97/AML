@@ -15,11 +15,11 @@ The project includes:
 
 ## Repository Files
 - `datasetUrl.txt`: File contains a url to download the full dataset used.
-- - `data_sample_100.csv`: Csv file contais a sample (100 rows) of the full data  set.
+- `data_sample_100.csv`: Csv file contais a sample (100 rows) of the full data  set.
 - `ClearningDataAgreed.R`: Script to clene the cvs data.
 - `RandomForest.R`: The main script that contains the R code for data preprocessing, model training, and evaluation.
 - `README.md`: This documentation file providing an overview of the project.
-- **Data**: Placeholder for the dataset file (not included due to size or privacy).
+- **Data**: Placeholder for the full dataset file (not included due to size ).
 
 ## Dependencies
 To run the code, you need the following R packages:
