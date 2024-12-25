@@ -1,4 +1,4 @@
-#Applied Machine Learning 
+# Applied Machine Learning 
 
 ## Predicting Incident Severity Using Random Forest
 
