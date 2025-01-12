@@ -8,8 +8,8 @@ library(randomForest)
 set.seed(123)
 
 # Reduce training and test data size for initial testing
-sample_size_train <- 5000  # Reduced training rows
-sample_size_test <- 1000   # Reduced testing rows
+sample_size_train <- 20000  # Reduced training rows
+sample_size_test <- 4000   # Reduced testing rows
 
 # Ensure reproducible random sampling
 train_data <- train_data[sample(nrow(train_data), sample_size_train), ]
@@ -30,7 +30,8 @@ rf_model <- train(
   data = train_data,
   method = "rf",
   trControl = train_control,
-  tuneLength = 2 # Reduced tuneLength for faster training
+  tuneLength = 2, # Reduced tuneLength for faster training
+  metric = "Accuracy"  # Now applicable
 )
 
 # Print model summary
@@ -42,8 +43,8 @@ print(rf_model)
 test_predictions <- predict(rf_model, newdata = test_data)
 
 # Convert predictions and actual values to factors with the same levels
-test_predictions <- factor(test_predictions, levels = levels(test_data$severity))
-test_data$severity <- factor(test_data$severity, levels = levels(test_predictions))
+train_data$severity <- factor(train_data$severity, levels = c(0, 1, 2))
+test_data$severity <- factor(test_data$severity, levels = c(0, 1, 2))
 
 # Confusion matrix to evaluate the model
 conf_matrix <- confusionMatrix(test_predictions, test_data$severity)

@@ -99,14 +99,31 @@ gun_data_final <- mutate(gun_data_final %>% relocate(n_casualties, .after = n_in
 gun_data_final <- select(gun_data_final, -n_killed, -n_injured)
 
 # Create severity column based on n_casualties
-gun_data_final$severity <- cut(
-  gun_data_final$n_casualties,
-  breaks = c(-1, 0, 2, 5, 10, Inf),
-  labels = c(1, 2, 3, 4, 5),
-  right = TRUE
+#gun_data_final$severity <- cut(
+#  gun_data_final$n_casualties,
+#  breaks = c(-1, 0, 2, 5, 10, Inf),
+#  labels = c(1, 2, 3, 4, 5),
+#  right = TRUE
+#)
+
+#gun_data_final$severity <- cut(
+#  gun_data_final$n_casualties,
+#  breaks = c(-1, 0, 1, Inf),
+  #  labels = c(0, 1, 2),
+#  right = TRUE
+
+gun_data_final$severity <- factor(
+  cut(
+    gun_data_final$n_casualties,
+    breaks = c(-1, 0, 1, Inf),
+    labels = c(0, 1, 2),
+    right = TRUE
+  ),
+  levels = c(0, 1, 2)  
 )
 
-gun_data_final$severity <- as.numeric(as.character(gun_data_final$severity))
+# gun_data_final$severity <- as.numeric(as.character(gun_data_final$severity))
+gun_data_final$severity <- factor(gun_data_final$severity, levels = c("0", "1", "2"))
 
 
 # Remove n_casualties as this correlates to severity
